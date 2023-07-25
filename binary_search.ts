@@ -8,47 +8,41 @@
 // Binary search requires a sorted list, which means being able to compare
 // whether an item can be found on either side of split collections based
 // on a comparison against the middle element.
+//
+// This algorithm could be changed to support a comparison function where
+// given two items it would return:
+// * item 1 === item 2
+// * item 1 > item 2
+// * item 1 < item 2
+//
+// This function would then support 
 export function recursive(
   list: number[],
   item: number,
-  offset = 0,
+  low: number | undefined = undefined,
+  high: number | undefined = undefined,
 ): number | void {
-  // in the case there is nothing in the list, there's nothing to search;
+  // in the case there is nothing in the list, there's nothing to search
   if (list.length === 0) {
     return;
   }
 
-  const low = 0;
-  const high = list.length - 1;
-  const mid = Math.floor((high - low) / 2);
-  const elementAtMid = list[mid];
+  low = low ?? 0;
+  high = high ?? list.length - 1;
+  const mid = low + Math.floor((high - low) / 2);
 
-  console.log({ low, high, mid, elementAtMid, offset });
-
-  const foundMatch = elementAtMid === item;
-  if (foundMatch) {
-    return offset + mid;
+  if (item === list[mid]) {
+    return mid;
   }
 
-  // choose remaining upper or lower slice based on how the item compares to the element in the middle
-  // this is where the assumption that the list is sorted comes into play
-  let remainingListToSearch;
-  let newOffset;
-
-  if (item > elementAtMid) {
-    const newLow = mid + 1;
-    const newHigh = high + 1;
-    newOffset = offset + newLow;
-
-    remainingListToSearch = list.slice(newLow, newHigh);
-  } else {
-    const newLow = low;
-    const newHigh = mid;
-    newOffset = offset + newLow;
-
-    remainingListToSearch = list.slice(newLow, newHigh);
+  // check if item is within the range of list
+  // this assumption works when the list is sorted
+  if (item < list[low] || item > list[high]) {
+    return;
   }
 
-  // recursive check with the remaining slice for the item
-  return recursive(remainingListToSearch, item, newOffset);
+  const itemInHigherRange = item > list[mid];
+  const [newLow, newHigh] = itemInHigherRange ? [mid + 1, high] : [low, mid - 1];
+
+  return recursive(list, item, newLow, newHigh);
 }

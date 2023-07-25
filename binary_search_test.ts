@@ -19,9 +19,25 @@ Deno.test("it finds an item in an even-numbered lengthed list", function () {
   assertEquals(foundAtIndex, expectedIndex);
 });
 
-Deno.test("it returns undefined when an item cannot be found", function () {
+Deno.test("it returns undefined when an item cannot be found because it outside the upper bounds", function () {
   const list = [0, 1, 2, 3];
   const itemToFind = 9000;
+
+  const foundAtIndex = recursiveBinarySearch(list, itemToFind);
+  assertEquals(foundAtIndex, undefined);
+});
+
+Deno.test("it returns undefined when an item cannot be found because it outside the lower bounds", function () {
+  const list = [0, 1, 2, 3];
+  const itemToFind = 9000;
+
+  const foundAtIndex = recursiveBinarySearch(list, itemToFind);
+  assertEquals(foundAtIndex, undefined);
+});
+
+Deno.test("it returns undefined when an item cannot be found within bounds", function () {
+  const list = [0, 1, 2, 4, 5];
+  const itemToFind = 3;
 
   const foundAtIndex = recursiveBinarySearch(list, itemToFind);
   assertEquals(foundAtIndex, undefined);

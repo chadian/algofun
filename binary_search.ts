@@ -15,7 +15,7 @@
 // * item 1 > item 2
 // * item 1 < item 2
 //
-// This function would then support 
+// This function would then support binary search on a generic list
 export function recursive(
   list: number[],
   item: number,
@@ -45,4 +45,23 @@ export function recursive(
   const [newLow, newHigh] = itemInHigherRange ? [mid + 1, high] : [low, mid - 1];
 
   return recursive(list, item, newLow, newHigh);
+}
+
+export function imperative(list: number[], item: number) {
+  let low = 0;
+  let high = list.length - 1;
+  let mid = -1;
+
+  // should stop when the item is found or when the range has collapsed
+  while (list[mid] !== item && high >= low) {
+    mid = low + Math.floor((high - low) / 2);
+
+    const itemInHigherRange = item > list[mid];
+    const [newLow, newHigh] = itemInHigherRange ? [mid + 1, high] : [low, mid - 1];
+
+    low = newLow;
+    high = newHigh;
+  }
+
+  return list[mid] === item ? mid : undefined;
 }

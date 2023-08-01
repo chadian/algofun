@@ -42,7 +42,9 @@ export function recursive(
   }
 
   const itemInHigherRange = item > list[mid];
-  const [newLow, newHigh] = itemInHigherRange ? [mid + 1, high] : [low, mid - 1];
+  const [newLow, newHigh] = itemInHigherRange
+    ? [mid + 1, high]
+    : [low, mid - 1];
 
   return recursive(list, item, newLow, newHigh);
 }
@@ -57,7 +59,9 @@ export function imperative(list: number[], item: number) {
     mid = low + Math.floor((high - low) / 2);
 
     const itemInHigherRange = item > list[mid];
-    const [newLow, newHigh] = itemInHigherRange ? [mid + 1, high] : [low, mid - 1];
+    const [newLow, newHigh] = itemInHigherRange
+      ? [mid + 1, high]
+      : [low, mid - 1];
 
     low = newLow;
     high = newHigh;

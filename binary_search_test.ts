@@ -1,6 +1,6 @@
 import {
-  recursive as recursiveBinarySearch,
   imperative as imperativeBinarySearch,
+  recursive as recursiveBinarySearch,
 } from "./binary_search.ts";
 import { assertEquals } from "https://deno.land/std@0.195.0/testing/asserts.ts";
 
@@ -31,7 +31,7 @@ function binarySearchTests(label: string, binarySearch: any) {
 
       const foundAtIndex = binarySearch(list, itemToFind);
       assertEquals(foundAtIndex, undefined);
-    }
+    },
   );
 
   Deno.test(
@@ -42,7 +42,7 @@ function binarySearchTests(label: string, binarySearch: any) {
 
       const foundAtIndex = binarySearch(list, itemToFind);
       assertEquals(foundAtIndex, undefined);
-    }
+    },
   );
 
   Deno.test(
@@ -53,7 +53,7 @@ function binarySearchTests(label: string, binarySearch: any) {
 
       const foundAtIndex = binarySearch(list, itemToFind);
       assertEquals(foundAtIndex, undefined);
-    }
+    },
   );
 
   Deno.test(`[${label}] it returns undefined when a list is empty`, function () {
@@ -74,5 +74,5 @@ function binarySearchTests(label: string, binarySearch: any) {
   });
 }
 
-binarySearchTests('with recursive', recursiveBinarySearch);
-binarySearchTests('with imperative', imperativeBinarySearch);
+binarySearchTests("with recursive", recursiveBinarySearch);
+binarySearchTests("with imperative", imperativeBinarySearch);

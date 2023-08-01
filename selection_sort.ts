@@ -40,3 +40,27 @@ function findLowestIndexRecursive(
 
   return findLowestIndexRecursive(array, next, lowest);
 }
+
+export function imperative(array: number[]): number[] {
+  // make copy so that it can be modified at will
+  array = [...array];
+  const sorted: number[] = [];
+  const itemsToSort = array.length;
+
+  while (sorted.length < itemsToSort) {
+    let lowest = null;
+
+    for (let i = 0; i < array.length; i++) {
+      if (lowest === null || array[i] < array[lowest]) {
+        lowest = i;
+      }
+    }
+
+    if (lowest !== null) {
+      sorted.push(array[lowest]);
+      array.splice(lowest, 1);
+    }
+  }
+
+  return sorted;
+}

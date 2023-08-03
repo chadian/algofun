@@ -15,7 +15,7 @@ export function recursive(items: number[]): number[] {
       const pivot = items[PIVOT_INDEX];
       const { before, after } = items.reduce(
         ({ before, after }, item, index) => {
-          // avoid including pivot by just returning the existing { before, after}
+          // avoid including pivot by just returning the existing { before, after }
           // an alternative would be to create a copy of the array
           // and unshift but that seems more intensive than just
           // skipping one function call

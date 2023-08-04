@@ -11,14 +11,11 @@ export function recursive(items: number[]): number[] {
     }
 
     default: {
-      const PIVOT_INDEX = 0;
+      const PIVOT_INDEX = Math.floor(Math.random() * items.length);
       const pivot = items[PIVOT_INDEX];
       const { before, after } = items.reduce(
         ({ before, after }, item, index) => {
-          // avoid including pivot by just returning the existing { before, after }
-          // an alternative would be to create a copy of the array
-          // and unshift but that seems more intensive than just
-          // skipping one function call
+          // Skip the pivot
           if (index === PIVOT_INDEX) {
             return { before, after };
           }
@@ -97,11 +94,16 @@ export function imperative (items: number[]): number[] {
       continue;
     }
 
-    const PIVOT_INDEX = 0;
+    const PIVOT_INDEX = Math.floor(Math.random() * items.length);
     const pivot = items[PIVOT_INDEX];
     const before = [];
     const after = [];
-    for (let i = PIVOT_INDEX + 1; i < items.length; i++) {
+    for (let i = 0; i < items.length; i++) {
+      // Skip the pivot
+      if (i === PIVOT_INDEX) {
+        continue;
+      }
+
       if (items[i] > pivot) {
         after.push(items[i]);
       } else {

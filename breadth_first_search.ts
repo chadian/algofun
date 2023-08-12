@@ -21,7 +21,8 @@ export function search(graph: Graph, start: any, find: any): any[] {
   queue.enqueue(startNode);
   const nodeToParent = new Map<Node, Node | null>();
   
-  while(queue.length) {
+  let found = false;
+  while(queue.length && !found) {
     const node = queue.dequeue() as Node;
 
     for (const child of node.edges) {
@@ -33,6 +34,7 @@ export function search(graph: Graph, start: any, find: any): any[] {
       nodeToParent.set(child, node);
 
       if (child === findNode) {
+        found = true;
         break;
       }
 

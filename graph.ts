@@ -22,7 +22,9 @@ export class Graph {
     return this.nodes.get(value);
   }
 
-  connect({ node, to }: { node: Node, to: Node }) {
-    node.edges.push(to);
+  connect({ from, to }: { from: any, to: any }) {
+    const f = this.createNode(from);
+    const t = this.createNode(to);
+    f.edges.push(t);
   }
 }

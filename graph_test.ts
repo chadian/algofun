@@ -10,10 +10,11 @@ Deno.test('it always return the same node for the same value', function() {
 
 Deno.test('it can connect two nodes', function() {
   const graph = new Graph();
-  const node1 = graph.createNode(1);
-  const node2 = graph.createNode(2);
-  graph.connect({ node: node1, to: node2 });
-  assertEquals(node1.edges, [node2]);
+  graph.connect({ from: 1, to: 2 });
+  assertEquals(graph.nodeForValue(1), {
+    value: 1,
+    edges: [graph.nodeForValue(2)!]
+  })
 });
 
 Deno.test('it can lookup a node by value', function() {

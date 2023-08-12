@@ -2,8 +2,8 @@ import {
   imperative as imperativeSelectionSort,
   recursive as recursiveSelectionSort,
 } from "./selection_sort.ts";
-import { recursive as recursiveQuickSort } from './quick_sort.ts';
-import { imperative as imperativeQuickSort } from './quick_sort.ts';
+import { recursive as recursiveQuickSort } from "./quick_sort.ts";
+import { imperative as imperativeQuickSort } from "./quick_sort.ts";
 import { assertEquals } from "https://deno.land/std@0.195.0/testing/asserts.ts";
 
 function selectionSortTests(label: string, sortFunction: any) {

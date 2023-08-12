@@ -10,7 +10,7 @@ type QueueItem = {
 // exported symbol since they may have enqueued a `null`
 // or `undefined` and those would be returned from `dequeue`
 // accordingly.
-export const EMPTY_ITEM = Symbol('empty-item');
+export const EMPTY_ITEM = Symbol("empty-item");
 
 // The primary responsibility of the Queue is to allow items
 // to enter the queue (via `queue`) and for the first item

@@ -28,7 +28,7 @@ export function recursive(items: number[]): number[] {
 
           return { before, after };
         },
-        { before: [], after: [] } as { before: number[]; after: number[] }
+        { before: [], after: [] } as { before: number[]; after: number[] },
       );
 
       const beforeSorted = recursive(before);
@@ -46,11 +46,11 @@ export function recursive(items: number[]): number[] {
 // an array and replaces it with a deconstruction, either:
 // * 0 element array spliced by deleting the array
 // * 1 element array spliced with the element itself
-// * 2 element array spliced with the correctly sorted two elements 
+// * 2 element array spliced with the correctly sorted two elements
 // * > 2 element array spliced with [array of items before pivot], pivot, [array of items after pivot]
 // * this continues until no more arrays are found to be
 // deconstructed and the loop is broken;
-// 
+//
 // Example:
 // [[-20, 20, -100, 10]]
 // would become
@@ -58,8 +58,8 @@ export function recursive(items: number[]): number[] {
 // => [-100, -20, [20, 10]] where an array ([-100]) with one
 // element is replaced with the only item
 // => [-100, -20, 10, 20] where a two element array is
-// replaced with the two elements sorted 
-export function imperative (items: number[]): number[] {
+// replaced with the two elements sorted
+export function imperative(items: number[]): number[] {
   const toSort: (number | number[])[] = [];
   toSort.push(items);
 

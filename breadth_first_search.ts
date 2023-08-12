@@ -6,11 +6,11 @@ export function iterative(graph: Graph, start: any, find: any): any[] {
   const findNode = graph.nodeForValue(find);
 
   if (!startNode) {
-    throw new Error('`start` does not exist in graph');
+    throw new Error("`start` does not exist in graph");
   }
 
   if (!findNode) {
-    throw new Error('`find` does not exist in graph');
+    throw new Error("`find` does not exist in graph");
   }
 
   if (startNode === findNode) {
@@ -20,9 +20,9 @@ export function iterative(graph: Graph, start: any, find: any): any[] {
   const queue = new Queue();
   queue.enqueue(startNode);
   const nodeToParent = new Map<Node, Node | null>();
-  
+
   let found = false;
-  while(queue.length && !found) {
+  while (queue.length && !found) {
     const node = queue.dequeue() as Node;
 
     for (const child of node.edges) {
@@ -54,7 +54,7 @@ export function iterative(graph: Graph, start: any, find: any): any[] {
     n = nodeToParent.get(n)!;
   }
 
-  const valuePath = path.map(node => node.value);
+  const valuePath = path.map((node) => node.value);
   return valuePath;
 }
 
@@ -63,11 +63,11 @@ export function recursive(graph: Graph, start: any, find: any): any {
   const findNode = graph.nodeForValue(find);
 
   if (!startNode) {
-    throw new Error('`start` does not exist in graph');
+    throw new Error("`start` does not exist in graph");
   }
 
   if (!findNode) {
-    throw new Error('`find` does not exist in graph');
+    throw new Error("`find` does not exist in graph");
   }
 
   if (startNode === findNode) {
@@ -82,7 +82,11 @@ export function recursive(graph: Graph, start: any, find: any): any {
   return path;
 }
 
-function processNodeToParentMap(nodeToParent: Map<Node, Node>, current: Node, path: Node[] = []): Node[] {
+function processNodeToParentMap(
+  nodeToParent: Map<Node, Node>,
+  current: Node,
+  path: Node[] = [],
+): Node[] {
   path.unshift(current.value);
 
   if (!nodeToParent.has(current)) {
@@ -94,7 +98,11 @@ function processNodeToParentMap(nodeToParent: Map<Node, Node>, current: Node, pa
 
 // Slightly cheating by using a Map and Queue to track state in the recursive solution
 // Maybe worth revisiting later
-function _searchRecursive(queue: Queue, find: Node, nodeToParent: Map<Node, Node> = new Map()) {
+function _searchRecursive(
+  queue: Queue,
+  find: Node,
+  nodeToParent: Map<Node, Node> = new Map(),
+) {
   if (queue.length === 0) {
     return nodeToParent;
   }
@@ -106,7 +114,7 @@ function _searchRecursive(queue: Queue, find: Node, nodeToParent: Map<Node, Node
   const current = queue.dequeue() as Node;
 
   // add unseen children to map
-  current.edges.forEach(child => {
+  current.edges.forEach((child) => {
     if (!nodeToParent.has(child)) {
       nodeToParent.set(child, current);
       queue.enqueue(child);

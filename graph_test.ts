@@ -34,3 +34,13 @@ Deno.test("it returns undefined when a node cannot be found for a value", functi
   const graph = new Graph();
   assertEquals(graph.nodeForValue({}), undefined);
 });
+
+Deno.test("it supports an edge meta object with #connect", function() {
+  const graph = new Graph();
+  const meta = { hello: 'bonjour' };
+
+  graph.connect({ from: 1234, to: 5678, meta });
+
+  assertEquals(graph.nodeForValue(1234)?.edges[0].meta, meta);
+  assertEquals(graph.nodeForValue(5678)?.edges.length, 0);
+});

@@ -25,7 +25,7 @@ export function iterative(graph: Graph, start: any, find: any): any[] {
   while (queue.length && !found) {
     const node = queue.dequeue() as Node;
 
-    for (const child of node.edges) {
+    for (const { node: child } of node.edges) {
       // already seen this node
       if (nodeToParent.has(child)) {
         continue;
@@ -114,7 +114,7 @@ function _searchRecursive(
   const current = queue.dequeue() as Node;
 
   // add unseen children to map
-  current.edges.forEach((child) => {
+  current.edges.forEach(({ node: child }) => {
     if (!nodeToParent.has(child)) {
       nodeToParent.set(child, current);
       queue.enqueue(child);

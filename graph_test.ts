@@ -13,7 +13,7 @@ Deno.test("it can connect two nodes", function () {
   graph.connect({ from: 1, to: 2 });
   assertEquals(graph.nodeForValue(1), {
     value: 1,
-    edges: [graph.nodeForValue(2)!],
+    edges: [{ node: graph.nodeForValue(2)!, meta: {} }],
   });
 });
 

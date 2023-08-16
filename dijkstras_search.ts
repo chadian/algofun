@@ -14,6 +14,18 @@ export function dijkstras(
   const startNode = graph.nodeForValue(start) as DijkstrasNode;
   const findNode = graph.nodeForValue(find) as DijkstrasNode;
 
+  if (!startNode) {
+    throw new Error("`start` does not exist in graph");
+  }
+
+  if (!findNode) {
+    throw new Error("`find` does not exist in graph");
+  }
+
+  if (startNode === findNode) {
+    return [startNode.value];
+  }
+
   const traverseMap = new Map<
     DijkstrasNode,
     { total: number; parent: null | DijkstrasNode }

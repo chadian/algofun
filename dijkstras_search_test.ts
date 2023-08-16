@@ -1,3 +1,4 @@
+import { assertThrows } from "https://deno.land/std@0.195.0/assert/assert_throws.ts";
 import { DijkstrasEdgeMeta, dijkstras } from "./dijkstras_search.ts";
 import { Graph } from "./graph.ts";
 import { assertEquals } from "https://deno.land/std@0.195.0/assert/assert_equals.ts";
@@ -28,4 +29,23 @@ Deno.test('it can find the shortest path based on Graph weights', function() {
 
   // page 127 for illustration of expectation
   assertEquals(path, [ "BOOK", "LP", "DRUMS", "PIANO" ]);
+});
+
+Deno.test('it handles the case when the start and find are the same', function() {
+  const graph = new Graph<any, DijkstrasEdgeMeta>();
+  graph.createNode('BOOK');
+  const path = dijkstras(graph, 'BOOK', 'BOOK');
+  assertEquals(path, ['BOOK']);
+});
+
+Deno.test('it throws if start value is not found in graph', function() {
+  const graph = new Graph<any, DijkstrasEdgeMeta>();
+  graph.createNode('BOOK');
+  assertThrows(() => dijkstras(graph, 'LP', 'BOOK'));
+});
+
+Deno.test('it throws if find value is not found in graph', function() {
+  const graph = new Graph<any, DijkstrasEdgeMeta>();
+  graph.createNode('BOOK');
+  assertThrows(() => dijkstras(graph, 'BOOK', 'LP'));
 });
